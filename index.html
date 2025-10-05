@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aarav & Sakku - The Official Page</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for a playful, dramatic look */
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@100..900&display=swap');
+        
+        .romantic-font {
+            font-family: 'Pacifico', cursive;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Subtle pulsating heart animation */
+        @keyframes pulse-heart {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulsing-heart {
+            animation: pulse-heart 1.5s infinite ease-in-out;
+        }
+
+        .heart-icon {
+            display: inline-block;
+            color: #ec4899; /* Pink-600 */
+            margin: 0 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-pink-100 min-h-screen flex items-center justify-center p-4">
+    <!-- Main Prank Container -->
+    <div class="w-full max-w-lg bg-white shadow-2xl rounded-xl p-6 md:p-10 text-center border-4 border-pink-300 transform transition-all hover:shadow-pink-400/50">
+        
+        <!-- Header Section -->
+        <h1 class="text-4xl md:text-5xl font-extrabold text-pink-700 romantic-font mb-2 pulsing-heart">
+            Official Status Update
+        </h1>
+        <p class="text-lg text-gray-500 mb-6">Read Carefully. This is Not a Drill.</p>
+        
+        <!-- Main Announcement -->
+        <div class="bg-pink-50 p-6 rounded-lg mb-8 border border-pink-200">
+            <div class="text-2xl md:text-3xl font-black text-pink-900 mb-4">
+                <span class="heart-icon text-4xl">💖</span>
+                AARAV LOVES SAKKU
+                <span class="heart-icon text-4xl">💖</span>
+            </div>
+            <p class="text-xl text-pink-600 font-semibold italic">
+                The greatest revelation of our time has been made public.
+            </p>
+        </div>
+
+        <!-- Prank Details Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div class="bg-purple-100 p-4 rounded-lg shadow-inner">
+                <p class="text-sm font-bold text-purple-700">CURRENT STATUS:</p>
+                <p class="text-2xl font-black text-purple-900">100% Committed</p>
+            </div>
+            <div class="bg-purple-100 p-4 rounded-lg shadow-inner">
+                <p class="text-sm font-bold text-purple-700">NEXT OFFICIAL UPDATE:</p>
+                <p class="text-2xl font-black text-purple-900">Never (It's Forever)</p>
+            </div>
+        </div>
+
+        <!-- Call to Action (The Silly Button) -->
+        <button id="confessButton" class="w-full py-3 px-6 bg-pink-500 text-white font-bold text-lg rounded-full shadow-lg hover:bg-pink-600 transition duration-300 transform hover:scale-[1.02] active:scale-95 border-2 border-pink-700">
+            Click to Congratulate Aarav!
+        </button>
+
+        <!-- Message Box (Instead of alert()) -->
+        <div id="messageBox" class="mt-6 p-3 bg-pink-200 text-pink-800 rounded-lg hidden font-medium border-l-4 border-pink-700 transition duration-300">
+            Aarav thanks you for acknowledging the truth!
+        </div>
+
+        <!-- Footer Prank Text -->
+        <p class="mt-8 text-xs text-gray-400">
+            *This message is legally binding across all social platforms. Unauthorized denial is strictly prohibited.*
+        </p>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const button = document.getElementById('confessButton');
+            const messageBox = document.getElementById('messageBox');
+            
+            // Function to handle the button click
+            button.addEventListener('click', () => {
+                // 1. Show the custom message box
+                messageBox.classList.remove('hidden');
+                messageBox.classList.add('animate-fadeIn');
+
+                // 2. Disable the button and change text briefly
+                const originalText = button.textContent;
+                button.textContent = "CONGRATULATIONS RECEIVED!";
+                button.disabled = true;
+
+                // 3. Reset after a few seconds
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.disabled = false;
+                    messageBox.classList.add('hidden');
+                }, 3000); 
+            });
+        });
+    </script>
+</body>
+</html>
+

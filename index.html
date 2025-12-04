@@ -1,117 +1,481 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aarav & Sakku - The Official Page</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom styles for a playful, dramatic look */
-        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@100..900&display=swap');
-        
-        .romantic-font {
-            font-family: 'Pacifico', cursive;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-        }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Premium Holiday Visual — 💖 by Abhiii</title>
+<style>
+  :root{
+    --bg1:#0b0d0f;
+    --bg2:#071011;
+    --spotify:#1DB954;
+    --warm:#f2c96d; /* warm gold accent */
+    --white:#eef6fb;
+    --muted: rgba(238,246,251,0.9);
+  }
+  html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg1),var(--bg2));font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:var(--white);-webkit-font-smoothing:antialiased}
+  .view { width:100%; height:100vh; display:grid; place-items:center; overflow:hidden; -webkit-tap-highlight-color:transparent; }
+  .scene {
+    width:380px; height:675px; max-width:420px; max-height:756px; aspect-ratio:9/16;
+    transform-style:preserve-3d; perspective:1400px; position:relative; border-radius:16px; overflow:hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.02);
+    background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(6,8,10,0.65));
+  }
+  .scene::after{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(60% 55% at 50% 35%, rgba(29,185,84,0.03), transparent 25%),
+               linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.55));
+    pointer-events:none;
+  }
 
-        /* Subtle pulsating heart animation */
-        @keyframes pulse-heart {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+  /* hint + footer */
+  .hint { position:absolute;top:12px;left:16px;color:rgba(230,246,230,0.72);font-size:13px;z-index:50;display:flex;gap:8px;align-items:center; }
+  .hint .dot{width:8px;height:8px;border-radius:50%;background:var(--spotify);box-shadow:0 0 14px rgba(29,185,84,0.6)}
+  .footer { position:absolute; left:0; right:0; bottom:8px; display:flex; justify-content:center; pointer-events:none; z-index:60 }
+  .footer .sig { background: rgba(255,255,255,0.03); padding:6px 10px; border-radius:999px; font-size:13px; color:rgba(238,246,251,0.92); backdrop-filter: blur(6px); border:1px solid rgba(255,255,255,0.02) }
+  .footer .sig strong{ margin-left:6px; font-family: "Georgia", serif; font-weight:600; letter-spacing:0.6px; }
 
-        .pulsing-heart {
-            animation: pulse-heart 1.5s infinite ease-in-out;
-        }
+  /* center stage */
+  .stage { position:absolute; inset:0; display:grid; place-items:center; z-index:10; transform-style:preserve-3d; }
 
-        .heart-icon {
-            display: inline-block;
-            color: #ec4899; /* Pink-600 */
-            margin: 0 0.5rem;
-        }
-    </style>
+  .ring-wrap{ width:54%; aspect-ratio:1/1; min-width:220px; max-width:340px; transform-style:preserve-3d; position:relative; filter:drop-shadow(0 28px 40px rgba(0,0,0,.6)); }
+
+  .ring { width:100%; height:100%; border-radius:50%; position:relative; display:block; transform-style:preserve-3d; --tilt: 14deg; transform: rotateX(var(--tilt)) rotateY(0deg) rotateZ(0deg); }
+  .ring .band { position:absolute; inset:0; border-radius:50%; box-sizing:border-box; pointer-events:none; display:grid; place-items:center; overflow:visible; }
+  .ring .band.inner { transform: translateZ(18px); background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.03), transparent 25%), rgba(0,0,0,0.12); box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 40px rgba(29,185,84,0.06) inset; border: 6px solid rgba(29,185,84,0.12); backdrop-filter: blur(2px); }
+  .ring .band.outer { transform: translateZ(-6px) scale(1.04); border: 8px solid rgba(29,185,84,0.18); box-shadow: 0 8px 40px rgba(29,185,84,0.06), 0 0 80px rgba(29,185,84,0.08) inset; }
+
+  .neon { position:absolute; inset:0; border-radius:50%; background: conic-gradient(from 0deg, rgba(29,185,84,0.95) 0 6%, rgba(255,255,255,0.08) 8% 12%, rgba(29,185,84,0.45) 12% 26%, rgba(29,185,84,0.88) 26% 42%, rgba(255,255,255,0.06) 42% 48%, rgba(29,185,84,0.95) 48% 100%); mask: radial-gradient(farthest-side, transparent 62%, black 63%); opacity:0.95; filter:blur(6px); transform: translateZ(12px) scale(.98); mix-blend-mode:screen; }
+
+  .core { position:absolute; left:38%; top:38%; width:24%; height:24%; border-radius:50%; transform: translate(-50%,-50%) translateZ(30px); background: radial-gradient(circle at 30% 25%, #fff, rgba(255,255,255,0.85) 6%, rgba(29,185,84,0.9) 35%, rgba(29,185,84,0.25) 70%); box-shadow: 0 0 40px rgba(29,185,84,0.9), 0 6px 30px rgba(0,0,0,0.6) inset; z-index:15; }
+  .core::after{ content:""; position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.65), transparent 35%); mix-blend-mode:screen; }
+
+  .sparks{ position:absolute; inset:-12%; pointer-events:none; z-index:12; }
+  canvas#snowCanvas{ position:absolute; inset:0; z-index:2; pointer-events:none; mix-blend-mode:screen; }
+
+  .shock { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:140%; height:140%; opacity:0; pointer-events:none; z-index:14; filter:blur(0.6px); mix-blend-mode:screen; }
+
+  /* warm bloom overlay (click-triggered) */
+  .bloom {
+    position:absolute; left:50%; top:50%; width:0; height:0; transform:translate(-50%,-50%); pointer-events:none; z-index:70;
+    border-radius:50%; opacity:0; mix-blend-mode:screen; filter:blur(28px);
+    background: radial-gradient(circle at 30% 30%, rgba(242,201,109,0.85), rgba(242,201,109,0.4) 25%, rgba(29,185,84,0.06) 48%, transparent 66%);
+  }
+
+  /* ribbon particles (svg) */
+  .ribbons { position:absolute; inset:0; z-index:68; pointer-events:none; }
+
+  /* affirmation text (elegant) */
+  .affirm {
+    position:absolute; left:50%; top:44%; transform:translate(-50%,-50%); z-index:80;
+    font-family: "Georgia", serif; font-size:18px; color: rgba(255,255,255,0.95);
+    background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.18));
+    padding:10px 18px; border-radius:12px; border:1px solid rgba(255,255,255,0.04);
+    opacity:0; pointer-events:none; backdrop-filter: blur(6px);
+    letter-spacing:0.2px;
+  }
+
+  .bottom-strip{ position:absolute; left:10px; right:10px; bottom:12px; padding:8px 12px; border-radius:10px; display:flex; align-items:center; gap:10px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); color:rgba(230,246,230,0.7); font-family:monospace; font-size:12px; backdrop-filter: blur(6px); z-index:40; }
+
+  @media(min-aspect-ratio:9/16){ .scene{ width:420px; height:742px } }
+  @media(max-width:420px){ .scene{ width:92vw; height:calc(92vw*16/9) } .bottom-strip{left:8px;right:8px} }
+</style>
 </head>
-<body class="bg-pink-100 min-h-screen flex items-center justify-center p-4">
-    <!-- Main Prank Container -->
-    <div class="w-full max-w-lg bg-white shadow-2xl rounded-xl p-6 md:p-10 text-center border-4 border-pink-300 transform transition-all hover:shadow-pink-400/50">
-        
-        <!-- Header Section -->
-        <h1 class="text-4xl md:text-5xl font-extrabold text-pink-700 romantic-font mb-2 pulsing-heart">
-            Official Status Update
-        </h1>
-        <p class="text-lg text-gray-500 mb-6">Read Carefully. This is Not a Drill.</p>
-        
-        <!-- Main Announcement -->
-        <div class="bg-pink-50 p-6 rounded-lg mb-8 border border-pink-200">
-            <div class="text-2xl md:text-3xl font-black text-pink-900 mb-4">
-                <span class="heart-icon text-4xl">💖</span>
-                AARAV LOVES SAKKU
-                <span class="heart-icon text-4xl">💖</span>
-            </div>
-            <p class="text-xl text-pink-600 font-semibold italic">
-                The greatest revelation of our time has been made public.
-            </p>
+<body>
+<div class="view">
+  <div class="scene" id="scene" aria-hidden="false" title="Tap to feel a gentle lift">
+    <div class="hint"><span class="dot"></span><span>Tap for a gentle lift</span></div>
+
+    <canvas id="snowCanvas" width="720" height="1280"></canvas>
+
+    <div class="stage" id="stage">
+      <div class="ring-wrap" id="ringWrap" aria-hidden="true">
+        <div class="ring" id="ring">
+          <div class="band outer"></div>
+          <div class="neon"></div>
+          <div class="band inner"></div>
+          <div class="core" id="core"></div>
         </div>
 
-        <!-- Prank Details Section -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            <div class="bg-purple-100 p-4 rounded-lg shadow-inner">
-                <p class="text-sm font-bold text-purple-700">CURRENT STATUS:</p>
-                <p class="text-2xl font-black text-purple-900">100% Committed</p>
-            </div>
-            <div class="bg-purple-100 p-4 rounded-lg shadow-inner">
-                <p class="text-sm font-bold text-purple-700">NEXT OFFICIAL UPDATE:</p>
-                <p class="text-2xl font-black text-purple-900">Never (It's Forever)</p>
-            </div>
-        </div>
+        <svg class="ribbons" id="ribbons" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice"></svg>
 
-        <!-- Call to Action (The Silly Button) -->
-        <button id="confessButton" class="w-full py-3 px-6 bg-pink-500 text-white font-bold text-lg rounded-full shadow-lg hover:bg-pink-600 transition duration-300 transform hover:scale-[1.02] active:scale-95 border-2 border-pink-700">
-            Click to Congratulate Aarav!
-        </button>
-
-        <!-- Message Box (Instead of alert()) -->
-        <div id="messageBox" class="mt-6 p-3 bg-pink-200 text-pink-800 rounded-lg hidden font-medium border-l-4 border-pink-700 transition duration-300">
-            Aarav thanks you for acknowledging the truth!
-        </div>
-
-        <!-- Footer Prank Text -->
-        <p class="mt-8 text-xs text-gray-400">
-            *This message is legally binding across all social platforms. Unauthorized denial is strictly prohibited.*
-        </p>
-
+        <!-- shockwave -->
+        <svg class="shock" id="shockSVG" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
+          <circle cx="100" cy="100" r="30" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.6"/>
+          <circle cx="100" cy="100" r="44" fill="none" stroke="rgba(29,185,84,0.12)" stroke-width="0.6"/>
+          <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(29,185,84,0.06)" stroke-width="0.5"/>
+        </svg>
+      </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const button = document.getElementById('confessButton');
-            const messageBox = document.getElementById('messageBox');
-            
-            // Function to handle the button click
-            button.addEventListener('click', () => {
-                // 1. Show the custom message box
-                messageBox.classList.remove('hidden');
-                messageBox.classList.add('animate-fadeIn');
+    <div class="bloom" id="bloom"></div>
+    <div class="affirm" id="affirm"></div>
 
-                // 2. Disable the button and change text briefly
-                const originalText = button.textContent;
-                button.textContent = "CONGRATULATIONS RECEIVED!";
-                button.disabled = true;
+    <div class="bottom-strip">
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="width:10px;height:10px;border-radius:50%;background:#ff5f56"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:#ffbd2e"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:#27c93f"></div>
+      </div>
+      <div style="flex:1;font-size:13px;opacity:.9">Holiday Visual • Premium Vibe • 15s loop</div>
+      <div style="opacity:.8;font-size:13px">Made with care ✨</div>
+    </div>
 
-                // 3. Reset after a few seconds
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.disabled = false;
-                    messageBox.classList.add('hidden');
-                }, 3000); 
-            });
-        });
-    </script>
+    <div class="footer">
+      <div class="sig">💖 by <strong>Abhiii</strong></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- small helpers ---------- */
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const easeOutQuad=t=>t*(2-t);
+
+/* ---------- sizing & canvas ---------- */
+const scene = document.getElementById('scene');
+const ring = document.getElementById('ring');
+const core = document.getElementById('core');
+const shockSVG = document.getElementById('shockSVG');
+const ribbonsSVG = document.getElementById('ribbons');
+const snowCanvas = document.getElementById('snowCanvas');
+const ctxSnow = snowCanvas.getContext('2d');
+const bloom = document.getElementById('bloom');
+const affirm = document.getElementById('affirm');
+
+function resizeCanvas(){
+  const rect = scene.getBoundingClientRect();
+  snowCanvas.width = Math.round(rect.width * devicePixelRatio);
+  snowCanvas.height = Math.round(rect.height * devicePixelRatio);
+  snowCanvas.style.width = rect.width + 'px';
+  snowCanvas.style.height = rect.height + 'px';
+  ctxSnow.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+  // size bloom
+  bloom.style.width = (rect.width * 1.4) + 'px';
+  bloom.style.height = (rect.width * 1.4) + 'px';
+  bloom.style.left = (rect.width/2) + 'px';
+  bloom.style.top = (rect.height/2) + 'px';
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+/* ---------- snow ---------- */
+let snowParticles = [];
+function initSnow(){
+  snowParticles = [];
+  const rect = scene.getBoundingClientRect();
+  const count = Math.round((rect.width*rect.height)/25000);
+  for(let i=0;i<count;i++){
+    snowParticles.push({
+      x: Math.random()*rect.width,
+      y: Math.random()*rect.height,
+      r: Math.random()*2.6 + 0.6,
+      vx: (Math.random()-0.5)*0.2,
+      vy: Math.random()*0.4 + 0.18,
+      alpha: Math.random()*0.6 + 0.25,
+      depth: Math.random()
+    });
+  }
+}
+initSnow();
+
+/* ---------- ribbon particles (elegant arcs) ---------- */
+const ribbons = [];
+function spawnRibbons(cx, cy){
+  const rect = scene.getBoundingClientRect();
+  const base = Math.min(rect.width, rect.height) * 0.42;
+  for(let i=0;i<5;i++){
+    ribbons.push({
+      t:0,
+      life: 1100 + Math.random()*700,
+      cx, cy,
+      radius: base * (0.5 + Math.random()*0.35),
+      angle: (Math.random()*Math.PI*2),
+      speed: 0.002 + Math.random()*0.002,
+      width: 6 + Math.random()*8,
+      hueShift: Math.random()*30 - 10
+    });
+  }
+}
+function renderRibbons(){
+  const rect = scene.getBoundingClientRect();
+  ribbonsSVG.innerHTML = '';
+  for(let i=ribbons.length-1;i>=0;i--){
+    const r=ribbons[i];
+    const p = r.t / r.life;
+    if(p>=1){ ribbons.splice(i,1); continue; }
+    // compute arc path
+    const len = 0.6 + 0.8*Math.sin(p*Math.PI);
+    const angle = r.angle + p*2.4;
+    const x1 = r.cx + Math.cos(angle)*r.radius*(0.2 + 0.6*p);
+    const y1 = r.cy + Math.sin(angle)*r.radius*(0.2 + 0.6*p)*0.7;
+    const x2 = r.cx + Math.cos(angle + 0.9)*r.radius*(0.55 + 0.3*p);
+    const y2 = r.cy + Math.sin(angle + 0.9)*r.radius*(0.55 + 0.3*p)*0.7;
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    const sw = Math.max(1, r.width * (1 - p*0.9));
+    const alpha = 0.9*(1 - p);
+    const g = `M ${ (x1/rect.width*100).toFixed(2) },${ (y1/rect.height*100).toFixed(2) } Q ${ (r.cx/rect.width*100).toFixed(2) },${ (r.cy/rect.height*100).toFixed(2) } ${ (x2/rect.width*100).toFixed(2) },${ (y2/rect.height*100).toFixed(2) }`;
+    path.setAttribute('d', g);
+    path.setAttribute('stroke', `rgba(242,201,109,${alpha})`);
+    path.setAttribute('stroke-width', sw.toFixed(2));
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke-linecap','round');
+    path.setAttribute('opacity',alpha);
+    ribbonsSVG.appendChild(path);
+    // advance
+    r.t += 16;
+    r.angle += r.speed * 120;
+  }
+}
+
+/* ---------- timeline & animation state ---------- */
+const LOOP = 15000;
+const events = [
+  {t:0, action:'impact'},
+  {t:400, action:'pulse'},
+  {t:1200, action:'microSink'},
+  {t:2200, action:'pulse'},
+  {t:3400, action:'miniImpact'},
+  {t:5200, action:'pulse'},
+  {t:7600, action:'midImpact'},
+  {t:9800, action:'pulse'},
+  {t:11800, action:'finalSpike'},
+  {t:13200, action:'settle'},
+];
+
+let lastLoopTime = performance.now();
+let triggered = new Set();
+
+let ringRotation = {x:12, y:0, spin:0.0009};
+let ringScale = 1;
+let coreGlow = 1;
+let cameraShake = {x:0,y:0};
+let sinkOffset = 0;
+let shockOpacity = 0;
+let fadeT = 0;
+
+/* handle animation triggers */
+function trigger(name, cx=null, cy=null){
+  if(name === 'impact' || name==='midImpact' || name==='finalSpike'){
+    shockOpacity = 1;
+    for(let i=0;i<18;i++) spawnSmallSparks();
+    cameraShake.x = (Math.random()-0.5)*2.2;
+    cameraShake.y = (Math.random()-0.5)*1.6;
+    ringScale = 1.12;
+    coreGlow = 2.2;
+    sinkOffset = 10;
+  } else if(name === 'pulse'){
+    for(let i=0;i<5;i++) spawnSmallSparks();
+    ringScale = Math.max(ringScale,1.06);
+    coreGlow = Math.max(coreGlow,1.5);
+    cameraShake.x += (Math.random()-0.5)*0.5;
+  } else if(name === 'microSink'){
+    sinkOffset = 6;
+    ringScale = Math.max(ringScale,1.03);
+    coreGlow = Math.max(coreGlow,1.22);
+    spawnSmallSparks();
+  } else if(name === 'miniImpact'){
+    shockOpacity = Math.max(shockOpacity,0.5);
+    for(let i=0;i<10;i++) spawnSmallSparks();
+    cameraShake.x += (Math.random()-0.5)*1.0;
+    ringScale = Math.max(ringScale,1.05);
+  } else if(name === 'settle'){
+    coreGlow = 1.0;
+    ringScale = 1.0;
+  } else if(name === 'gentleLift'){ 
+    // click-triggered mature lift: warm bloom + ribbons + affirmation
+    // spawn ribbons around cx,cy
+    spawnRibbons(cx, cy);
+    // gentle camera nudge
+    cameraShake.x += (Math.random()-0.5)*1.4;
+    ringScale = Math.max(ringScale,1.05);
+    coreGlow = Math.max(coreGlow,1.45);
+    showAffirmation();
+    // animate bloom (handled separately)
+    animateBloom();
+  }
+}
+
+/* ---------- sparks (tiny white sparks for texture) ---------- */
+const miniSparks = [];
+function spawnSmallSparks(){
+  miniSparks.push({
+    x: Math.random(), y: Math.random(),
+    life: 500 + Math.random()*700,
+    t:0, size: 0.6 + Math.random()*1.6
+  });
+}
+function renderMiniSparks(){
+  // use ribbonsSVG to render small circles (cheap)
+  // but we prefer sparing usage - we'll draw as tiny SVG circles
+  // clear a small overlay
+  // (we'll skip expensive rendering for simplicity)
+}
+
+/* ---------- bloom animation (warm golden wash) ---------- */
+let bloomTimer = null;
+function animateBloom(){
+  const rect = scene.getBoundingClientRect();
+  bloom.style.transition = 'none';
+  bloom.style.opacity = '1';
+  bloom.style.transform = 'translate(-50%,-50%) scale(0.6)';
+  // subtle warm tint over background (via scene pseudo)
+  scene.style.transition = 'background 600ms ease';
+  scene.style.background = `linear-gradient(180deg, rgba(8,6,2,0.6), rgba(12,8,6,0.5))`;
+  // ramp bloom scale & fade
+  requestAnimationFrame(()=> {
+    bloom.style.transition = 'opacity 1200ms ease, transform 900ms cubic-bezier(.2,.8,.2,1)';
+    bloom.style.transform = 'translate(-50%,-50%) scale(1.08)';
+    bloom.style.opacity = '0.9';
+  });
+  clearTimeout(bloomTimer);
+  bloomTimer = setTimeout(()=> {
+    bloom.style.opacity = '0';
+    bloom.style.transform = 'translate(-50%,-50%) scale(1.18)';
+    // revert subtle background after fade
+    setTimeout(()=> { scene.style.background = `linear-gradient(180deg, rgba(0,0,0,0.45), rgba(6,8,10,0.65))`; }, 380);
+  }, 820);
+}
+
+/* ---------- affirmation text ---------- */
+const affirmations = [
+  "You’re making progress.",
+  "Take a breath — you’re okay.",
+  "Small steps count.",
+  "You matter.",
+  "One moment at a time.",
+  "You’re doing well."
+];
+let affirmTimer = null;
+function showAffirmation(){
+  const txt = affirmations[Math.floor(Math.random()*affirmations.length)];
+  affirm.textContent = txt;
+  affirm.style.transition = 'none';
+  affirm.style.opacity = '0';
+  affirm.style.transform = 'translate(-50%,-50%) scale(0.98)';
+  requestAnimationFrame(()=> {
+    affirm.style.transition = 'opacity 240ms ease, transform 360ms cubic-bezier(.2,.8,.2,1)';
+    affirm.style.opacity = '1';
+    affirm.style.transform = 'translate(-50%,-50%) scale(1)';
+  });
+  clearTimeout(affirmTimer);
+  affirmTimer = setTimeout(()=> {
+    affirm.style.transition = 'opacity 340ms ease, transform 300ms ease';
+    affirm.style.opacity = '0';
+    affirm.style.transform = 'translate(-50%,-50%) scale(0.96)';
+  }, 1600);
+}
+
+/* ---------- timeline & main animation ---------- */
+let last = performance.now();
+function frame(now){
+  const dt = now - last;
+  last = now;
+
+  const loopPos = (now % LOOP);
+  if(loopPos < (lastLoopTime % LOOP)) triggered.clear();
+  lastLoopTime = now;
+
+  for(const ev of events){
+    if(loopPos >= ev.t && !triggered.has(ev)){
+      trigger(ev.action);
+      triggered.add(ev);
+    }
+  }
+
+  // decay
+  shockOpacity = lerp(shockOpacity, 0, clamp(dt*0.005, 0, 1));
+  ringScale = lerp(ringScale, 1, clamp(dt*0.004,0,1));
+  coreGlow = lerp(coreGlow, 1, clamp(dt*0.006,0,1));
+  cameraShake.x = lerp(cameraShake.x, 0, clamp(dt*0.006,0,1));
+  cameraShake.y = lerp(cameraShake.y, 0, clamp(dt*0.008,0,1));
+  sinkOffset = lerp(sinkOffset, 0, clamp(dt*0.007,0,1));
+
+  ringRotation = ringRotation || {x:12,y:0,spin:0.0009};
+  ringRotation.y += ringRotation.spin * dt * 1.6;
+  ringRotation.x = lerp(ringRotation.x || 12, 12 + Math.sin(now*0.0006)*3, 0.02);
+
+  const fadeStart = LOOP - 1000;
+  let fadeLocal = clamp((loopPos - fadeStart) / 1000, 0, 1);
+  fadeT = (1 - Math.cos(Math.PI * clamp(fadeLocal,0,1))) / 2;
+
+  const shakeX = cameraShake.x * (1 + Math.sin(now*0.04)*0.3);
+  const shakeY = cameraShake.y * (1 + Math.cos(now*0.04)*0.3);
+  ring.style.transform = `rotateX(${ringRotation.x - sinkOffset*0.12}deg) rotateY(${ringRotation.y}deg) translateZ(${sinkOffset*0.6}px)`;
+  const wrap = document.getElementById('ringWrap');
+  wrap.style.transform = `scale(${ringScale*(1 - fadeT*0.12)}) translate(${shakeX}px, ${shakeY}px)`;
+
+  core.style.boxShadow = `0 0 ${20*coreGlow}px rgba(29,185,84,${0.9*coreGlow}) , 0 8px 30px rgba(0,0,0,0.55) inset`;
+  core.style.transform = `translate(-50%,-50%) translateZ(${30 + sinkOffset}px) scale(${1 * coreGlow*(1 - fadeT*0.2)})`;
+
+  shockSVG.style.opacity = Math.max(0, shockOpacity* (1 - fadeT));
+  shockSVG.style.transform = `translate(-50%,-50%) scale(${1 + shockOpacity*0.9 - fadeT*0.25})`;
+
+  // update ribbons time & render
+  for(let r of ribbons) { r.t += dt; }
+  renderRibbons();
+
+  updateSnow(dt);
+  drawSnow();
+
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+/* ---------- snow draw ---------- */
+function updateSnow(dt){
+  const rect = scene.getBoundingClientRect();
+  for(let p of snowParticles){
+    const sway = Math.sin((performance.now()*0.00018 + p.depth*10))*0.22;
+    p.x += p.vx + sway*0.08;
+    p.y += p.vy * (0.9 + p.depth*0.6);
+    if(p.y > rect.height + 6){
+      p.y = -8 - Math.random()*24;
+      p.x = Math.random()*rect.width;
+    }
+    if(p.x < -10) p.x = rect.width + 8;
+    if(p.x > rect.width + 10) p.x = -8;
+  }
+}
+function drawSnow(){
+  const rect = scene.getBoundingClientRect();
+  ctxSnow.clearRect(0,0,rect.width,rect.height);
+  ctxSnow.fillStyle = `rgba(0,0,0,${0.06})`;
+  ctxSnow.fillRect(0,0,rect.width,rect.height);
+  for(let p of snowParticles){
+    ctxSnow.beginPath();
+    ctxSnow.globalAlpha = p.alpha * (0.95);
+    ctxSnow.fillStyle = `rgba(238,246,251,${p.alpha})`;
+    ctxSnow.arc(p.x, p.y, p.r* (1+ (1-p.depth)*0.9), 0, Math.PI*2);
+    ctxSnow.fill();
+  }
+  ctxSnow.globalAlpha = 1.0;
+}
+
+/* ---------- initial kick ---------- */
+(function kickstart(){
+  for(let i=0;i<12;i++){
+    // initial subtle ribbons
+    spawnRibbons(scene.getBoundingClientRect().width/2, scene.getBoundingClientRect().height/2);
+  }
+})();
+
+/* ---------- interaction: mature tap to trigger gentle lift ---------- */
+scene.addEventListener('click', (e)=>{
+  const rect = scene.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  trigger('gentleLift', x, y);
+});
+
+/* accessibility: keyboard triggers */
+window.addEventListener('keydown',(e)=>{
+  if(e.code === 'Space' || e.code === 'Enter'){
+    const rect = scene.getBoundingClientRect();
+    trigger('gentleLift', rect.width/2, rect.height/2);
+  }
+});
+</script>
 </body>
 </html>
-
